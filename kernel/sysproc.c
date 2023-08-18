@@ -21,6 +21,12 @@ sys_getpid(void)
   return myproc()->pid;
 }
 
+//returns the process ID of the parent of the calling process.
+uint64
+sys_getppid(void) {
+  return myproc()->parent->pid;
+}
+
 uint64
 sys_fork(void)
 {
