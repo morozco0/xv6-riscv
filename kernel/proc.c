@@ -146,6 +146,10 @@ found:
   p->context.ra = (uint64)forkret;
   p->context.sp = p->kstack + PGSIZE;
 
+  acquire(&tickslock);
+  p->time = ticks;
+  release(&tickslock);
+
   return p;
 }
 
@@ -445,6 +449,7 @@ void
 scheduler(void)
 {
   struct proc *p;
+  struct proc *chosen = 0;
   struct cpu *c = mycpu();
   
   c->proc = 0;
@@ -453,7 +458,12 @@ scheduler(void)
     intr_on();
 
     for(p = proc; p < &proc[NPROC]; p++) {
-      acquire(&p->lock);
+      if (chosen == 0 || p->time < chosen->time) {
+        chosen = p;
+      }
+    }
+
+    acquire(&p->lock);
       if(p->state == RUNNABLE) {
         // Switch to chosen process.  It is the process's job
         // to release its lock and then reacquire it
@@ -467,7 +477,6 @@ scheduler(void)
         c->proc = 0;
       }
       release(&p->lock);
-    }
   }
 }
 
