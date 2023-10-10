@@ -23,8 +23,34 @@ sys_getpid(void)
 
 //returns the process ID of the parent of the calling process.
 uint64
-sys_getppid(void) {
+sys_getppid(void) 
+{
   return myproc()->parent->pid;
+}
+
+uint64
+sys_getancestor(void)
+{
+  int n;
+  argint(0, &n);
+
+  struct proc *ancestor = myproc();
+
+  if (n == 0){
+
+    return myproc()->pid;
+  }
+
+  while (n > 0 && ancestor->parent ) {
+    ancestor = ancestor->parent;
+    n--;
+  }
+
+  if (n > 0){
+    return -1;
+  }
+
+  return ancestor->pid;
 }
 
 uint64
