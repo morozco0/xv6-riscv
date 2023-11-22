@@ -5,26 +5,21 @@
 #define NULL ((void *)0)
 
 int main(int argc, char *argv[]) {
-    int a, b ,c;
+    int a;
     int *pi;
 
     a = 5;
     pi = &a; // pi points to a
-    b = *pi; // b is now 5
 
-    printf("Values before NULL pointer dereference:\n");
-    printf("NULL Pointer Value: %p\n", *pi);
-    printf("a Pointer Value: %p\n", a);
-    printf("b Pointer Value: %p\n", b);
+    printf("Dato inicial:\n");
+    printf("NULL Pointer Value: %p\n", pi);
+    printf("Pointer Value: %x\n", *pi);
 
-    pi = NULL;
-    c = *pi; // this is a NULL pointer dereference
+    a=0;
 
-    printf("\nValues after NULL pointer dereference:\n");
-    printf("NULL Pointer Value: %p\n", *pi);
-    printf("a Pointer Value: %p\n", a);
-    printf("b Pointer Value: %p\n", b);
-    printf("c Pointer Value: %p\n", c);
+    printf("\nDato sobreescrito:\n");
+    printf("NULL Pointer Value: %p\n", pi);
+    printf("Pointer Value: %x\n", *pi);
     
     exit(0);
 }
