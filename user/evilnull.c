@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
     printf("NULL Pointer Value: %p\n", pi);
     printf("Pointer Value: %x\n", *pi);
 
-    a=0;
+    *pi = 0;
 
     printf("\nDato sobreescrito:\n");
     printf("NULL Pointer Value: %p\n", pi);
