@@ -134,6 +134,7 @@ UPROGS=\
 	$U/_zombie\
 	$U/_hola\
 	$U/_alarma\
+	$U/_chmod\
 
 fs.img: mkfs/mkfs README $(UPROGS)
 	mkfs/mkfs fs.img README $(UPROGS)
